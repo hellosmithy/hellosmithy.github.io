@@ -1,3 +1,115 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// --- Typography ---
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+// --- Single-column focused layout ---
+// Collapse the three-column grid into a single centred column.
+// Sidebars (left/right) are emptied in quartz.layout.ts;
+// this CSS removes leftover grid space.
+
+.page {
+  max-width: 750px; // ~max-w-2xl equivalent
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  & > #quartz-body {
+    display: block; // override the 3-column grid entirely
+
+    // hide empty sidebars
+    & .sidebar {
+      display: none;
+    }
+  }
+}
+
+// --- Header: inline bar with site title + controls ---
+
+.page-header {
+  margin-top: 0 !important;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--lightgray);
+  margin-bottom: 2rem;
+}
+
+// Lay out header children (PageTitle, Flex[Search, Darkmode]) in a row
+header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+// Page title in header: inline, not oversized
+header .page-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+
+  a {
+    color: var(--dark);
+    font-weight: 500;
+
+    &:hover {
+      color: var(--dark);
+    }
+  }
+}
+
+// --- Article title ---
+
+article > h1 {
+  font-size: 2rem !important;
+  letter-spacing: -0.02em;
+}
+
+// --- Links ---
+
+a {
+  color: var(--secondary);
+  text-decoration-color: color-mix(in srgb, var(--secondary) 30%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+
+  &:hover {
+    color: var(--tertiary);
+    text-decoration-color: var(--tertiary);
+  }
+}
+
+// --- Backlinks section ---
+
+.backlinks {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--lightgray);
+}
+
+// --- Footer ---
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+  border-top: 1px solid var(--lightgray);
+
+  p {
+    font-family: var(--headerFont);
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--gray);
+  }
+}
+
+// --- Selection colour ---
+
+::selection {
+  background: color-mix(in srgb, var(--secondary) 20%, transparent);
+  color: var(--darkgray);
+}
