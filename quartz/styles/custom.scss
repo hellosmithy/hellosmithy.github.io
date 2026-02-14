@@ -97,11 +97,13 @@ footer {
   padding-top: 0;
   padding-bottom: 2.5rem;
 
-  p {
+  p, ul a, p a {
     font-family: var(--headerFont);
     font-style: italic;
     font-size: 0.875rem;
     color: var(--gray);
+    font-weight: 300;
+    text-transform: lowercase;
   }
 }
 
