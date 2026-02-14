@@ -4,7 +4,7 @@
   position: relative;
   background: none;
   border: none;
-  width: 20px;
+  width: 16px;
   height: 32px;
   margin: 0;
   text-align: inherit;
@@ -12,9 +12,9 @@
 
   & svg {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    top: calc(50% - 10px);
+    width: 16px;
+    height: 16px;
+    top: calc(50% - 8px);
     fill: var(--darkgray);
     transition: opacity 0.1s ease;
   }
