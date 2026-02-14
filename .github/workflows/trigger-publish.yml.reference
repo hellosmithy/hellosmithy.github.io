@@ -1,0 +1,21 @@
+# This workflow goes in the notes repo at .github/workflows/trigger-publish.yml
+# It triggers a rebuild of the site when notes are pushed.
+#
+# Requires: SITE_PAT secret on notes repo
+# (fine-grained PAT with write access to trigger dispatches on hellosmithy/hellosmithy.github.io)
+
+name: Trigger site rebuild
+on:
+  push:
+    branches: [main]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.SITE_PAT }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/hellosmithy/hellosmithy.github.io/dispatches \
+            -d '{"event_type":"publish"}'
