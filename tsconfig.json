@@ -1,11 +1,22 @@
 {
-  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    "lib": ["DOM", "ESNext"],
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "incremental": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "allowJs": true
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   },
-  "include": ["src", "api", "test", "*.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "./package.json"],
+  "exclude": ["build/**/*.d.ts"]
 }
