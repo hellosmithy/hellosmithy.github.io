@@ -27,6 +27,13 @@ import { isMac } from "./isMac";
 import { Kbd } from "./Kbd";
 import { parseKeys } from "./parseKeys";
 import { Shortcut } from "./Shortcut";
+import {
+  TbOutlineBrandX,
+  TbOutlineBrandGithub,
+  TbOutlineBrandBluesky,
+  TbOutlineBrandLinkedin,
+  TbOutlineRss,
+} from "solid-icons/tb";
 
 const INPUT_ID = "command-input";
 
@@ -185,18 +192,20 @@ export function CommandsPalette({
               </CommandGroup>
               <CommandGroup heading={<GroupHeading>Links</GroupHeading>}>
                 <CommandItem href="https://x.com/hellosmithy">
-                  X / Twitter
+                  <TbOutlineBrandX size={16} /> <span>x.com<Faded>/hellosmithy</Faded></span>
                 </CommandItem>
                 <CommandItem href="https://github.com/hellosmithy">
-                  GitHub
+                  <TbOutlineBrandGithub size={16} /> <span>github.com<Faded>/hellosmithy</Faded></span>
                 </CommandItem>
                 <CommandItem href="https://bsky.app/profile/hellosmithy.com">
-                  Bluesky
+                  <TbOutlineBrandBluesky size={16} /> <span>bsky.app<Faded>/hellosmithy</Faded></span>
                 </CommandItem>
                 <CommandItem href="https://www.linkedin.com/in/hellosmithy/">
-                  LinkedIn
+                  <TbOutlineBrandLinkedin size={16} /> <span>linkedin.com<Faded>/in/hellosmithy</Faded></span>
                 </CommandItem>
-                <CommandItem href="/rss.xml">RSS</CommandItem>
+                <CommandItem href="/rss.xml">
+                  <TbOutlineRss size={16} /> RSS
+                </CommandItem>
               </CommandGroup>
             </>
           }
@@ -242,7 +251,7 @@ function CommandItem(props: CommandItemProps) {
 
   const content = (
     <>
-      {own.children}
+      <span class="flex items-center gap-2 [&>svg]:shrink-0">{own.children}</span>
       <Show when={own.shortcut} keyed>
         {(shortcut) => <Shortcut class="ml-1" shortcut={shortcut} />}
       </Show>
@@ -271,6 +280,12 @@ function GroupHeading(props: { children: JSX.Element }) {
     <span class="p-2 text-xs font-semibold uppercase leading-none tracking-wider text-gray-400 dark:text-gray-500">
       {props.children}
     </span>
+  );
+}
+
+function Faded(props: { children: JSX.Element }) {
+  return (
+    <span class="text-gray-400 dark:text-gray-600">{props.children}</span>
   );
 }
 
