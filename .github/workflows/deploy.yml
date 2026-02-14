@@ -21,6 +21,7 @@ jobs:
 
       - name: Clone vault
         run: |
+          rm -rf content
           git clone https://x-access-token:${{ secrets.NOTES_PAT }}@github.com/hellosmithy/notes.git content
 
       - uses: actions/setup-node@v4
