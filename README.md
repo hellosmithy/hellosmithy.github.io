@@ -1,21 +1,29 @@
 # hellosmithy.com
 
-My personal website.
+Personal website and blog, built with [Astro](https://astro.build/) using the [Zaduma](https://github.com/hasparus/zaduma) template.
 
 ## Running Locally
 
-1. Install dependencies using pnpm:
-
 ```sh
 pnpm install
+pnpm dev
 ```
 
-2. Start the development server:
+## Building
 
 ```sh
-pnpm run dev
+pnpm build
 ```
 
-## Credit
+## Writing Posts
 
-This theme is based off of the example app [Astro-nomy](https://github.com/mickasmt/astro-nomy/) which in turn is based off [Taxonomy](https://tx.shadcn.com/) of shadcn.
+Add MDX files to `posts/`. Include `title` and `date` in frontmatter:
+
+```mdx
+---
+title: "Post Title"
+date: "2026-01-01"
+---
+
+Content goes here.
+```

@@ -1,153 +1,67 @@
 ---
-import MainLayout from "@/layouts/main-layout.astro";
-import { Image } from "astro:assets";
-import { hobbies } from "@/config/about.ts";
-import { Button } from "@/components/ui/button";
-import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { formatDate } from "../lib/formatDate";
+import { Link } from "../lib/Link";
+import { Paragraph } from "../lib/prose/Paragraph";
+import type { PostFrontmatter } from "../types";
+
+let posts = await Astro.glob<PostFrontmatter>("../../posts/**/*.mdx");
+
+if (import.meta.env.PROD) {
+  posts = posts.filter((post) => !post.frontmatter.draft);
+}
+
+posts.sort((a, b) => {
+  return (
+    new Date(b.frontmatter.date).getTime() -
+    new Date(a.frontmatter.date).getTime()
+  );
+});
 ---
 
-<MainLayout>
-  <section class="space-y-5">
-    <section
-      class="relative container max-w-screen-md mb-28 mt-16 sm:mt-20 lg:mt-28"
-    >
-      <div class="flex h-full flex-col justify-between">
-        <div class="grid gap-8 sm:grid-cols-2">
-          <div>
-            <h1 class="text-4xl font-heading text-foreground">Ben Smith</h1>
-            <p class="text-base text-muted-foreground mt-0.5">
-              Software Engineer
-            </p>
-          </div>
-          <div>
-            <p class="mb-4 text-base text-muted-foreground">
-              Hi there! I’m Ben, a software engineer with a passion for functional programming, design, and UX.
-            </p>
-            <p class="mb-4 text-base text-muted-foreground">
-              These days, I mostly program in React, Node, and TypeScript. I also enjoy working on some personal projects using Elixir and Phoenix.
-            </p>
-            <p class="mb-4 text-base text-muted-foreground">
-              I'm currently based in Hyogo, Japan where I enjoy hiking and cycling across the country with my family and dog.
-            </p>
-            <div class="flex items-center gap-3 mt-8">
-              <Button variant="outline" className="rounded-xl">
-                <Icon name="linkedin" class="mr-2 size-4" />
-                <a href="https://linkedin.com/in/hellosmithy">Connect with me</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<BaseLayout
+  title="Ben Smith — Software Engineer"
+  description="Personal blog of Ben Smith, Software Engineer."
+>
+  <h1 slot="header-content" class="text-gray-600 dark:text-gray-500">Ben Smith</h1>
+  <main class="py-10 zaduma-prose">
+    <Paragraph>
+      Software Engineer
+    </Paragraph>
+  </main>
+  <ul>
+    {
+      posts.map(({ frontmatter }) => {
+        const date = new Date(frontmatter.date);
 
-    <div
-      class="relative z-10 flex flex-col justify-center overflow-hidden lg:overflow-visible pb-16"
-    >
-      <div
-        class="mx-auto flex w-max -translate-x-[15%] justify-center lg:w-full lg:translate-x-0"
-      >
-        <div
-          class="relative z-10 mx-auto max-w-4xl px-4 md:max-w-6xl md:px-12 lg:max-w-5xl lg:px-6 xl:max-w-[80rem] xl:px-6 2xl:px-0"
-        >
-          <div class="grid grid-cols-4 items-center gap-4 md:gap-6">
-            {/* First Column */}
-            <div class="space-y-4 md:space-y-6">
-              <Image
-                class="h-full w-auto object-cover overflow-hidden rounded-xl"
-                src={hobbies[0].image}
-                alt={hobbies[0].alt}
-                width={800}
-                height={1226}
-                loading="eager"
-              />
-              <div class="h-52 overflow-hidden rounded-xl">
-                <Image
-                  class="w-full h-full object-cover"
-                  src={hobbies[1].image}
-                  alt={hobbies[1].alt}
-                  width={800}
-                  height={1334}
-                />
-              </div>
-            </div>
-
-            {/* Second Column */}
-            <div class="space-y-4 md:space-y-6">
-              <div class="h-48 overflow-hidden rounded-xl">
-                <Image
-                  class="w-full h-full object-cover"
-                  src={hobbies[2].image}
-                  alt={hobbies[2].alt}
-                  width={800}
-                  height={983}
-                  loading="eager"
-                />
-              </div>
-              <Image
-                class="rounded-xl"
-                src={hobbies[3].image}
-                alt={hobbies[3].alt}
-                width={800}
-                height={1108}
-                loading="eager"
-              />
-              <div class="relative h-48 overflow-hidden rounded-xl">
-                <Image
-                  class="w-full h-full object-cover"
-                  src={hobbies[4].image}
-                  alt={hobbies[4].alt}
-                  width={1260}
-                  height={750}
-                />
-              </div>
-            </div>
-
-            {/* Third Column */}
-            <div class="space-y-4 md:space-y-6">
-              <div class="h-56 overflow-hidden rounded-xl">
-                <Image
-                  class="w-full h-full object-cover"
-                  src={hobbies[5].image}
-                  alt={hobbies[5].alt}
-                  width={800}
-                  height={1334}
-                  loading="eager"
-                />
-              </div>
-              <div class="h-80 w-full overflow-hidden rounded-xl xl:h-[28rem]">
-                <Image
-                  class="w-full h-full object-cover"
-                  src={hobbies[6].image}
-                  alt={hobbies[6].alt}
-                  width={801}
-                  height={2477}
-                />
-              </div>
-            </div>
-
-            {/* Fourth Column */}
-            <div class="space-y-4 md:space-y-6">
-              <div class="overflow-hidden rounded-xl bg-white">
-                <Image
-                  src={hobbies[7].image}
-                  alt={hobbies[7].alt}
-                  width={800}
-                  height={900}
-                  loading="eager"
-                />
-              </div>
-              <div class="overflow-hidden rounded-xl bg-white">
-                <Image
-                  src={hobbies[8].image}
-                  alt={hobbies[8].alt}
-                  width={800}
-                  height={900}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</MainLayout>
+        return (
+          <li>
+            <Link
+              href={frontmatter.path}
+              class="flex flex-row gap-2 justify-between"
+              noUnderline
+            >
+              <h2 class="text-gray-800 dark:text-gray-300 font-sans">
+                {frontmatter.title}
+              </h2>
+              <time
+                datetime={date.toISOString()}
+                class="text-gray-600 dark:text-gray-400 tabular-nums tracking-tighter shrink-0"
+              >
+                {formatDate(date)}
+              </time>
+            </Link>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <style>
+    ul:hover li:not(:hover) :where(h2, time) {
+      @apply text-gray-600 transition-colors;
+      :global(.dark) & {
+        @apply text-gray-500;
+      }
+    }
+  </style>
+</BaseLayout>
