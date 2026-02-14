@@ -84,6 +84,15 @@ a {
   }
 }
 
+// --- Last updated ---
+
+.last-updated {
+  font-family: var(--headerFont);
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--gray);
+}
+
 // --- Backlinks section ---
 
 .backlinks {

@@ -10,9 +10,6 @@ li.section-li {
   margin-bottom: 1em;
 
   & > .section {
-    display: grid;
-    grid-template-columns: fit-content(8em) 3fr 1fr;
-
     @media all and ($mobile) {
       & > .tags {
         display: none;
@@ -22,18 +19,11 @@ li.section-li {
     & > .desc > h3 > a {
       background-color: transparent;
     }
-
-    & .meta {
-      margin: 0 1em 0 0;
-      opacity: 0.6;
-    }
   }
 }
 
 // modifications in popover context
 .popover .section {
-  grid-template-columns: fit-content(8em) 1fr !important;
-
   & > .tags {
     display: none;
   }

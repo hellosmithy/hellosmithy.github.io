@@ -16,7 +16,7 @@ export const sharedPageComponents: SharedLayout = {
       ],
     }),
   ],
-  afterBody: [Component.Backlinks()],
+  afterBody: [Component.LastUpdated(), Component.Backlinks()],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/hellosmithy",

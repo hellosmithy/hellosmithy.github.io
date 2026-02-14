@@ -90,10 +90,12 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         .filter((page) => page !== undefined) ?? []
     const cssClasses: string[] = fileData.frontmatter?.cssclasses ?? []
     const classes = cssClasses.join(" ")
+    const isTopicFolder = fileData.slug?.startsWith("Topic") ?? false
     const listProps = {
       ...props,
       sort: options.sort,
       allFiles: allPagesInFolder,
+      showDates: !isTopicFolder,
     }
 
     const content = (
