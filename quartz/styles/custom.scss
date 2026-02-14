@@ -107,6 +107,21 @@ footer {
   }
 }
 
+// --- Search: subtle underline style ---
+
+.search > .search-button {
+  border: none;
+  border-bottom: 1px solid var(--gray);
+  border-radius: 0;
+  padding: 0.3rem 0.5rem;
+
+  & > svg {
+    width: 14px;
+    min-width: 14px;
+    margin: 0 0.4rem 0 0;
+  }
+}
+
 // --- Selection colour ---
 
 ::selection {
