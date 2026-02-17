@@ -137,3 +137,16 @@ footer {
   background: color-mix(in srgb, var(--secondary) 20%, transparent);
   color: var(--darkgray);
 }
+
+// --- Excalidraw SVGs: tint to match theme text colour ---
+// SVG strokes are black on transparent; filters shift them to --darkgray.
+
+img[src*="excalidraw"] {
+  // Light mode: #000 → ~#586e75 (Solarized base01)
+  filter: invert(34%) sepia(15%) saturate(500%) hue-rotate(145deg) brightness(95%);
+}
+
+:root[saved-theme="dark"] img[src*="excalidraw"] {
+  // Dark mode: #000 → ~#93a1a1 (Solarized base1)
+  filter: invert(70%) sepia(10%) saturate(300%) hue-rotate(145deg) brightness(95%);
+}
