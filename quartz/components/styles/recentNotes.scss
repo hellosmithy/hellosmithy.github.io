@@ -1,23 +1,33 @@
 .recent-notes {
   & > h3 {
-    margin: 0.5rem 0 0 0;
     font-size: 1rem;
+    margin: 0;
   }
 
   & > ul.recent-ul {
     list-style: none;
-    margin-top: 1rem;
-    padding-left: 0;
+    margin: 0.5rem 0;
+    padding: 0;
 
     & > li {
-      margin: 1rem 0;
-      .section > .desc > h3 > a {
-        background-color: transparent;
+      margin-bottom: 0.75rem;
+      .section > .desc > h3 {
+        margin: 0;
+        font-family: var(--bodyFont);
+        font-size: 1rem;
+        font-weight: 400;
+
+        & > a {
+          background-color: transparent;
+        }
       }
 
       .section > .meta {
-        margin: 0 0 0.5rem 0;
-        opacity: 0.6;
+        margin: 0;
+        font-family: var(--headerFont);
+        font-style: italic;
+        font-size: 0.875rem;
+        color: var(--gray);
       }
     }
   }

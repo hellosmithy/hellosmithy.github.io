@@ -16,7 +16,25 @@ export const sharedPageComponents: SharedLayout = {
       ],
     }),
   ],
-  afterBody: [Component.LastUpdated(), Component.Backlinks()],
+  afterBody: [
+    Component.ConditionalRender({
+      component: Component.RecentNotes({
+        title: "Recently updated",
+        limit: 5,
+        showTags: false,
+        filter: (f) => !f.slug?.startsWith("Topic/"),
+      }),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+    Component.ConditionalRender({
+      component: Component.LastUpdated(),
+      condition: (page) => page.fileData.slug !== "index",
+    }),
+    Component.ConditionalRender({
+      component: Component.Backlinks(),
+      condition: (page) => page.fileData.slug !== "index",
+    }),
+  ],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/hellosmithy",

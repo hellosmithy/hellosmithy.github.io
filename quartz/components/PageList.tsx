@@ -58,10 +58,6 @@ type Props = {
   showDates?: boolean
 } & QuartzComponentProps
 
-function formatMonthYear(d: Date, locale: string): string {
-  return d.toLocaleDateString(locale, { month: "short", year: "numeric" })
-}
-
 export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort, showDates }: Props) => {
   const sorter = sort ?? byDateAndAlphabeticalFolderFirst(cfg)
   let list = allFiles.sort(sorter)
@@ -70,49 +66,41 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
   }
 
   const dates = showDates !== false
-  let lastMonthYear = ""
 
   return (
-    <ul class={`section-ul ${dates ? "with-dates" : ""}`}>
+    <ul class="section-ul">
       {list.map((page) => {
         const title = page.frontmatter?.title
         const tags = page.frontmatter?.tags ?? []
         const date = dates && page.dates ? getDate(cfg, page)! : undefined
-        const monthYear = date ? formatMonthYear(date, cfg.locale) : ""
-        const showMonth = monthYear !== lastMonthYear
-        if (showMonth) lastMonthYear = monthYear
 
         return (
           <li class="section-li">
             <div class="section">
-              {dates && (
-                <div class="section-date">
-                  {showMonth && monthYear && (
-                    <span class="section-month">{monthYear}</span>
-                  )}
-                </div>
-              )}
-              <div class="section-content">
-                <div class="desc">
-                  <h3>
-                    <a href={resolveRelative(fileData.slug!, page.slug!)} class="internal">
-                      {title}
-                    </a>
-                  </h3>
-                </div>
-                <ul class="tags">
-                  {tags.map((tag) => (
-                    <li>
-                      <a
-                        class="internal tag-link"
-                        href={resolveRelative(fileData.slug!, `tags/${tag}` as FullSlug)}
-                      >
-                        {tag}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+              <div class="desc">
+                <h3>
+                  <a href={resolveRelative(fileData.slug!, page.slug!)} class="internal">
+                    {title}
+                  </a>
+                </h3>
               </div>
+              {date && (
+                <p class="meta">
+                  <Date date={date} locale={cfg.locale} />
+                </p>
+              )}
+              <ul class="tags">
+                {tags.map((tag) => (
+                  <li>
+                    <a
+                      class="internal tag-link"
+                      href={resolveRelative(fileData.slug!, `tags/${tag}` as FullSlug)}
+                    >
+                      {tag}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </li>
         )
@@ -122,28 +110,22 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
 }
 
 PageList.css = `
-.with-dates .section {
-  display: grid;
-  grid-template-columns: 6rem 1fr;
-  gap: 0.5rem;
-}
-
 .section h3 {
   margin: 0;
+  font-family: var(--bodyFont);
+  font-size: 1rem;
+  font-weight: 400;
 }
 
-.section-date {
-  padding-top: 0.1rem;
-}
-
-.section-month {
+.section > .meta {
+  margin: 0;
   font-family: var(--headerFont);
   font-style: italic;
   font-size: 0.875rem;
   color: var(--gray);
 }
 
-.section-content > .tags {
+.section > .tags {
   margin: 0;
 }
 `
