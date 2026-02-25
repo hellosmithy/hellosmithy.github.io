@@ -12,7 +12,7 @@ const config: QuartzConfig = {
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
-    analytics: null,
+    analytics: { provider: "umami", websiteId: "54935721-f5b1-40eb-ab87-51b39ab5f890" },
     locale: "en-US",
     baseUrl: "hellosmithy.com",
     ignorePatterns: ["private", "_templates", ".obsidian", "daily", "_attachments", "_archive"],
