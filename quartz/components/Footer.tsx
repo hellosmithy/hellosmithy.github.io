@@ -15,7 +15,8 @@ export default ((opts?: Options) => {
     return (
       <footer class={`${displayClass ?? ""}`}>
         <p>
-          Built with <a href="https://quartz.jzhao.xyz/">Quartz</a> ·{" "}
+          Built with <a href="https://quartz.jzhao.xyz/">Quartz</a>
+          <span class="delimiter"> · </span>
           <a
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
             rel="license"
@@ -23,13 +24,14 @@ export default ((opts?: Options) => {
             CC BY-NC-SA
           </a>
         </p>
-        <ul>
-          {Object.entries(links).map(([text, link]) => (
-            <li>
+        <p>
+          {Object.entries(links).map(([text, link], i) => (
+            <>
+              {i > 0 && <span class="delimiter"> · </span>}
               <a href={link}>{text}</a>
-            </li>
+            </>
           ))}
-        </ul>
+        </p>
       </footer>
     );
   };

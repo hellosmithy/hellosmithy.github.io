@@ -1,5 +1,11 @@
 @use "./base.scss";
 
+// --- Delimiter ---
+
+.delimiter {
+  margin: 0 0.15em;
+}
+
 // --- Typography ---
 
 h1, h2, h3, h4, h5, h6 {
@@ -116,6 +122,19 @@ a {
   font-style: italic;
   font-size: 0.875rem;
   color: var(--gray);
+
+  a.tag-link {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    color: var(--gray);
+    font-weight: 300;
+
+    &:hover {
+      color: var(--tertiary);
+    }
+  }
 }
 
 // --- Backlinks section ---
@@ -131,7 +150,7 @@ footer {
   padding-top: 0;
   padding-bottom: 2.5rem;
 
-  p, ul a, p a {
+  p, p a {
     font-family: var(--headerFont);
     font-style: italic;
     font-size: 0.875rem;
