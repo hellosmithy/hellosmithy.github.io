@@ -28,7 +28,7 @@ export const sharedPageComponents: SharedLayout = {
       component: Component.RecentNotes({
         title: "Recently updated",
         limit: 5,
-        showTags: false,
+        showTags: true,
         filter: (f) => !f.slug?.startsWith("Topic/"),
       }),
       condition: (page) => page.fileData.slug === "index",
