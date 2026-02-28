@@ -84,23 +84,22 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
                   </a>
                 </h3>
               </div>
-              {date && (
+              {(date || tags.length > 0) && (
                 <p class="meta">
-                  <Date date={date} locale={cfg.locale} />
+                  {date && <Date date={date} locale={cfg.locale} />}
+                  {tags.map((tag) => (
+                    <>
+                      <span class="delimiter"> · </span>
+                      <a
+                        class="internal tag-link"
+                        href={resolveRelative(fileData.slug!, `tags/${tag}` as FullSlug)}
+                      >
+                        {tag}
+                      </a>
+                    </>
+                  ))}
                 </p>
               )}
-              <ul class="tags">
-                {tags.map((tag) => (
-                  <li>
-                    <a
-                      class="internal tag-link"
-                      href={resolveRelative(fileData.slug!, `tags/${tag}` as FullSlug)}
-                    >
-                      {tag}
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </div>
           </li>
         )
@@ -125,7 +124,16 @@ PageList.css = `
   color: var(--gray);
 }
 
-.section > .tags {
+.section > .meta a.tag-link {
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
   margin: 0;
+  color: var(--gray);
+  font-weight: 300;
+}
+
+.section > .meta a.tag-link:hover {
+  color: var(--tertiary);
 }
 `

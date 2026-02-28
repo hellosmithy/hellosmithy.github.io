@@ -53,24 +53,21 @@ export default ((userOpts?: Partial<Options>) => {
                       </a>
                     </h3>
                   </div>
-                  {page.dates && (
+                  {(page.dates || (opts.showTags && tags.length > 0)) && (
                     <p class="meta">
-                      <Date date={getDate(cfg, page)!} locale={cfg.locale} />
-                    </p>
-                  )}
-                  {opts.showTags && (
-                    <ul class="tags">
-                      {tags.map((tag) => (
-                        <li>
+                      {page.dates && <Date date={getDate(cfg, page)!} locale={cfg.locale} />}
+                      {opts.showTags && tags.map((tag) => (
+                        <>
+                          <span class="delimiter"> · </span>
                           <a
                             class="internal tag-link"
                             href={resolveRelative(fileData.slug!, `tags/${tag}` as FullSlug)}
                           >
                             {tag}
                           </a>
-                        </li>
+                        </>
                       ))}
-                    </ul>
+                    </p>
                   )}
                 </div>
               </li>
