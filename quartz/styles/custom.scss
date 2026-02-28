@@ -19,7 +19,6 @@ h1, h2, h3, h4, h5, h6 {
   & > #quartz-body {
     display: block; // override the 3-column grid entirely
 
-    // hide empty sidebars
     & .sidebar.left,
     & .sidebar.right {
       display: none;
@@ -43,6 +42,32 @@ header {
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
+}
+
+// Graph icon in header
+header .graph {
+  position: relative;
+  top: 2px;
+
+  .global-graph-icon {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--dark);
+    opacity: 0.5;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .graph-outer {
+    display: none;
+  }
 }
 
 // Page title in header: inline, not oversized
@@ -136,6 +161,12 @@ footer {
 ::selection {
   background: color-mix(in srgb, var(--secondary) 20%, transparent);
   color: var(--darkgray);
+}
+
+// --- Graph background tint ---
+// Light mode: tint towards lightgray (lighter), dark mode: tint towards black (darker)
+:root[saved-theme="dark"] {
+  --graph-tint: black;
 }
 
 // --- Excalidraw SVGs: tint to match theme text colour ---

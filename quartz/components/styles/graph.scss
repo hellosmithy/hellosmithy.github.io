@@ -1,39 +1,34 @@
 @use "../../styles/variables.scss" as *;
 
 .graph {
-  & > h3 {
-    font-size: 1rem;
-    margin: 0;
+  &:has(> .graph-outer) {
+    margin-bottom: 1.5rem;
   }
 
   & > .graph-outer {
-    border-radius: 5px;
-    border: 1px solid var(--lightgray);
     box-sizing: border-box;
     height: 250px;
-    margin: 0.5em 0;
     position: relative;
     overflow: hidden;
+    background-color: color-mix(in srgb, var(--light) 90%, var(--graph-tint, var(--lightgray)));
+    border-radius: 5px;
 
     & > .global-graph-icon {
       cursor: pointer;
       background: none;
       border: none;
       color: var(--dark);
-      opacity: 0.5;
-      width: 24px;
-      height: 24px;
+      opacity: 0.4;
+      width: 20px;
+      height: 20px;
       position: absolute;
-      padding: 0.2rem;
-      margin: 0.3rem;
-      top: 0;
-      right: 0;
-      border-radius: 4px;
-      background-color: transparent;
-      transition: background-color 0.5s ease;
-      cursor: pointer;
+      padding: 0;
+      top: 0.4rem;
+      right: 0.4rem;
+      transition: opacity 0.2s ease;
+
       &:hover {
-        background-color: var(--lightgray);
+        opacity: 1;
       }
     }
   }
@@ -55,7 +50,7 @@
 
     & > .global-graph-container {
       border: 1px solid var(--lightgray);
-      background-color: var(--light);
+      background-color: color-mix(in srgb, var(--light) 90%, var(--graph-tint, var(--lightgray)));
       border-radius: 5px;
       box-sizing: border-box;
       position: fixed;

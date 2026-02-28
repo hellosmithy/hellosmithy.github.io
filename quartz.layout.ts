@@ -5,7 +5,13 @@ import * as Component from "./quartz/components";
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [
-    Component.PageTitle(),
+    Component.Flex({
+      components: [
+        { Component: Component.GraphIcon() },
+        { Component: Component.PageTitle(), grow: true },
+      ],
+      gap: "0.5rem",
+    }),
     Component.Flex({
       components: [
         {
@@ -17,6 +23,7 @@ export const sharedPageComponents: SharedLayout = {
     }),
   ],
   afterBody: [
+    Component.Graph({ localGraph: { showTags: false } }),
     Component.ConditionalRender({
       component: Component.RecentNotes({
         title: "Recently updated",
@@ -25,10 +32,6 @@ export const sharedPageComponents: SharedLayout = {
         filter: (f) => !f.slug?.startsWith("Topic/"),
       }),
       condition: (page) => page.fileData.slug === "index",
-    }),
-    Component.ConditionalRender({
-      component: Component.LastUpdated(),
-      condition: (page) => page.fileData.slug !== "index",
     }),
     Component.ConditionalRender({
       component: Component.Backlinks(),
@@ -54,6 +57,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.ArticleTitle(),
     Component.ContentMeta(),
+    Component.LastUpdated(),
     Component.TagList(),
   ],
   left: [],
